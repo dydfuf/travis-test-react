@@ -28,6 +28,9 @@ deploy:
     acl: private
     local_dir : deploy
     wait-until-deployed: true
+    on:
+      repo: dydfuf/travis-test-react
+      branch: master
 
   - provider: codedeploy
     access_key_id: $AWS_ACCESS_KEY # Travis repo settings에 설정된 값
@@ -39,3 +42,11 @@ deploy:
     deployment_group: mapgoblin-group # 웹 콘솔에서 등록한 CodeDeploy 배포 그룹
     region: ap-northeast-2
     wait-until-deployed: true
+    on:
+      repo: dydfuf/travis-test-react
+      branch: master
+
+notifications:
+  email:
+    recipients:
+      - 88dydfuf@naver.com
