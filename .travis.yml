@@ -1,6 +1,11 @@
 language: node_js
 node_js:
   - 'stable'
+
+branches:
+  only:
+    - master
+
 cache:
   directories:
     - node_modules
@@ -14,14 +19,12 @@ before_deploy:
   - mv travis_test.zip deploy/travis_test.zip
 
 deploy:
-  provider: s3
-  access_key_id: $AWS_ACCESS_KEY
-  secret_access_key: $AWS_SECRET_KEY
-  bucket: mapgoblin-deploy-bucket
-  region: ap-northeast-2
-  skip_cleanup: true
-  acl: public_read
-  wait-until-deployed: true
-  github-token: $GITHUB_TOKEN
-  on:
-    branch: master
+  - provider: s3
+    access_key_id: $AWS_ACCESS_KEY # Travis repo settings에 설정된 값
+    secret_access_key: $AWS_SECRET_KEY # Travis repo settings에 설정된 값
+    bucket: mapgoblin-deploy-bucket
+    region: ap-northeast-2
+    skip_cleanup: true
+    acl: private
+    local_dir : deploy
+    wait-until-deployed: true
