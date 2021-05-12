@@ -13,11 +13,6 @@ script:
   - npm test
   - npm run build
 
-before_deploy:
-  - zip -r travis_test *
-  - mkdir -p deploy
-  - mv travis_test.zip deploy/travis_test.zip
-
 deploy:
   - provider: s3
     access_key_id: $AWS_ACCESS_KEY # Travis repo settings에 설정된 값
@@ -26,7 +21,7 @@ deploy:
     region: ap-northeast-2
     skip_cleanup: true
     acl: private
-    local_dir : deploy
+    local_dir : build
     wait-until-deployed: true
     on:
       repo: dydfuf/travis-test-react
