@@ -14,7 +14,7 @@ script:
   - npm run build
 
 before_deploy:
-  - zip -r travis /build
+  - zip -r travis ./build
   - mkdir -p deploy
   - mv travis.zip deploy/travis.zip
 
